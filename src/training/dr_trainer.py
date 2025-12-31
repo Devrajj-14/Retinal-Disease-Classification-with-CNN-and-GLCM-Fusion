@@ -37,7 +37,7 @@ class DRTrainer:
         """Train the model with optimized hyperparameters"""
         
         print(f"🏋️  Training {self.model_name} model...")
-        print(f"📊 Using parameters: {self.best_params}")
+        print(f" Using parameters: {self.best_params}")
         
         # Create model
         self.model = self.create_model()
@@ -62,7 +62,7 @@ class DRTrainer:
         patience_counter = 0
         patience = 10
         
-        print(f"🚀 Starting {self.model_name} training...")
+        print(f" Starting {self.model_name} training...")
         print("=" * 80)
         
         for epoch in range(num_epochs):
@@ -73,7 +73,7 @@ class DRTrainer:
             running_loss = 0.0
             correct, total = 0, 0
             
-            train_pbar = tqdm(train_loader, desc=f"🏃 Epoch {epoch+1}/{num_epochs}", leave=False)
+            train_pbar = tqdm(train_loader, desc=f" Epoch {epoch+1}/{num_epochs}", leave=False)
             for inputs, glcm_feats, labels in train_pbar:
                 inputs = inputs.to(self.device, non_blocking=True)
                 glcm_feats = glcm_feats.to(self.device, non_blocking=True)
@@ -128,7 +128,7 @@ class DRTrainer:
             scheduler.step(val_acc)
             
             epoch_time = time.time() - epoch_start
-            print(f"⏱️  Epoch {epoch+1:2d} ({epoch_time:5.1f}s) | "
+            print(f"  Epoch {epoch+1:2d} ({epoch_time:5.1f}s) | "
                   f"Train: {train_acc:.4f} | Val: {val_acc:.4f} | "
                   f"LR: {optimizer.param_groups[0]['lr']:.6f}")
             
@@ -139,11 +139,11 @@ class DRTrainer:
                 
                 # Save model state
                 self.best_model_state = self.model.state_dict().copy()
-                print(f"🎯 New best validation accuracy: {val_acc:.4f} - Model saved!")
+                print(f" New best validation accuracy: {val_acc:.4f} - Model saved!")
             else:
                 patience_counter += 1
                 if patience_counter >= patience:
-                    print(f"🛑 Early stopping after {epoch+1} epochs")
+                    print(f" Early stopping after {epoch+1} epochs")
                     break
         
         # Load best model
@@ -168,7 +168,7 @@ class DRTrainer:
     def evaluate_test_set(self, test_loader, class_names):
         """Evaluate model on test set"""
         
-        print("\n🧪 Final evaluation on test set...")
+        print("\n Final evaluation on test set...")
         self.model.eval()
         all_preds = []
         all_labels = []
@@ -185,9 +185,9 @@ class DRTrainer:
                 all_labels.extend(labels.numpy())
         
         test_accuracy = accuracy_score(all_labels, all_preds)
-        print(f"🎯 Final Test Accuracy: {test_accuracy:.4f}")
+        print(f" Final Test Accuracy: {test_accuracy:.4f}")
         
-        print("\n📊 Classification Report:")
+        print("\n Classification Report:")
         print(classification_report(all_labels, all_preds, target_names=class_names))
         
         # Store results for plotting

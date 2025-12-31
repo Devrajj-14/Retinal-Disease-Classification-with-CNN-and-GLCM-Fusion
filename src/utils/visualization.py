@@ -159,7 +159,7 @@ def create_output_directories():
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
     
-    print("✅ Output directories created")
+    print(" Output directories created")
 
 
 def save_training_plots(history, test_results, class_names, model_name, output_dir="outputs/plots"):

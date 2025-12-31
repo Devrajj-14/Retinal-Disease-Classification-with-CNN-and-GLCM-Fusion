@@ -62,7 +62,7 @@ def objective_function(trial, train_loader, val_loader, n_classes, model_name):
     else:
         weight_decay = 1e-4
     
-    print(f"🔧 Trial {trial.number}: lr={lr:.6f}, momentum={momentum:.3f}")
+    print(f" Trial {trial.number}: lr={lr:.6f}, momentum={momentum:.3f}")
     
     # Create model
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -110,7 +110,7 @@ def objective_function(trial, train_loader, val_loader, n_classes, model_name):
             correct += (predicted == labels).sum().item()
     
     accuracy = correct / total if total > 0 else 0
-    print(f"   🎯 Trial {trial.number} accuracy: {accuracy:.4f}")
+    print(f"    Trial {trial.number} accuracy: {accuracy:.4f}")
     
     # Clean up memory
     del model
@@ -121,8 +121,8 @@ def objective_function(trial, train_loader, val_loader, n_classes, model_name):
 def run_optimization(train_loader, val_loader, n_classes, model_name, n_trials):
     """Run Optuna hyperparameter optimization"""
     
-    print(f"🔧 Starting Optuna optimization for {model_name}...")
-    print(f"   🎯 Target: {n_trials} trials")
+    print(f" Starting Optuna optimization for {model_name}...")
+    print(f"    Target: {n_trials} trials")
     
     # Create study
     study = optuna.create_study(
@@ -140,16 +140,16 @@ def run_optimization(train_loader, val_loader, n_classes, model_name, n_trials):
     )
     
     optimization_time = time.time() - start_time
-    print(f"✅ Optimization completed in {optimization_time:.2f}s ({optimization_time/60:.1f} minutes)")
+    print(f" Optimization completed in {optimization_time:.2f}s ({optimization_time/60:.1f} minutes)")
     
     # Best parameters
     best_params = study.best_params
     best_score = 1 - study.best_value  # Convert back to accuracy
     
     print(f"\n🏆 BEST HYPERPARAMETERS FOR {model_name.upper()}:")
-    print(f"   🎯 Best Validation Accuracy: {best_score:.4f}")
+    print(f"    Best Validation Accuracy: {best_score:.4f}")
     for param, value in best_params.items():
-        print(f"   🔧 {param}: {value}")
+        print(f"    {param}: {value}")
     
     return best_params, best_score
 
@@ -157,7 +157,7 @@ def main():
     """Main training function"""
     args = parse_args()
     
-    print(f"🚀 {args.model.upper()} + GLCM for Diabetic Retinopathy Classification")
+    print(f" {args.model.upper()} + GLCM for Diabetic Retinopathy Classification")
     print("=" * 80)
     
     # Create output directories
@@ -168,18 +168,18 @@ def main():
     batch_size = args.batch_size or model_config['batch_size']
     image_size = model_config['image_size']
     
-    print(f"📁 Dataset directory: {args.data_dir}")
-    print(f"🏗️  Model: {args.model}")
+    print(f" Dataset directory: {args.data_dir}")
+    print(f"  Model: {args.model}")
     print(f"📐 Image size: {image_size}x{image_size}")
-    print(f"📦 Batch size: {batch_size}")
+    print(f" Batch size: {batch_size}")
     
     # Check device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"🚀 Using device: {device}")
+    print(f" Using device: {device}")
     
     try:
         # Create data loaders
-        print("\n🏗️  Creating data loaders...")
+        print("\n  Creating data loaders...")
         start_time = time.time()
         
         train_loader, val_loader, test_loader, class_names = create_data_loaders(
@@ -192,16 +192,16 @@ def main():
         )
         
         loader_time = time.time() - start_time
-        print(f"⏱️  Data loaders created in {loader_time:.2f}s")
+        print(f"  Data loaders created in {loader_time:.2f}s")
         
         n_classes = len(class_names)
-        print(f"📊 Dataset summary:")
+        print(f" Dataset summary:")
         print(f"   Classes: {class_names}")
         print(f"   Number of classes: {n_classes}")
         
         # Hyperparameter optimization
         if not args.skip_optimization:
-            print(f"\n🔧 Running Optuna optimization...")
+            print(f"\n Running Optuna optimization...")
             best_params, best_score = run_optimization(
                 train_loader, val_loader, n_classes, args.model, args.n_trials
             )
@@ -240,20 +240,20 @@ def main():
         }, model_save_path)
         
         # Final summary
-        print(f"\n🎉 {args.model.upper()} + GLCM FINAL RESULTS:")
+        print(f"\n {args.model.upper()} + GLCM FINAL RESULTS:")
         print("=" * 60)
-        print(f"🔧 Optuna Trials: {args.n_trials}")
-        print(f"🎯 Best Validation Accuracy: {best_val_acc:.4f} ({best_val_acc*100:.2f}%)")
-        print(f"🧪 Final Test Accuracy: {test_accuracy:.4f} ({test_accuracy*100:.2f}%)")
-        print(f"📊 Classes: {class_names}")
-        print(f"🏗️  Architecture: {args.model} + GLCM features")
+        print(f" Optuna Trials: {args.n_trials}")
+        print(f" Best Validation Accuracy: {best_val_acc:.4f} ({best_val_acc*100:.2f}%)")
+        print(f" Final Test Accuracy: {test_accuracy:.4f} ({test_accuracy*100:.2f}%)")
+        print(f" Classes: {class_names}")
+        print(f"  Architecture: {args.model} + GLCM features")
         print("=" * 60)
         
-        print(f"\n🔧 Optimized Hyperparameters:")
+        print(f"\n Optimized Hyperparameters:")
         for param, value in best_params.items():
             print(f"   {param}: {value}")
         
-        print(f"\n✅ Training completed! Model saved as '{model_save_path}'")
+        print(f"\n Training completed! Model saved as '{model_save_path}'")
         
         return trainer
         

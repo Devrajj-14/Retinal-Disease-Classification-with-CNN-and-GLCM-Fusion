@@ -6,16 +6,16 @@
 
 A comprehensive deep learning framework for retinal disease classification using state-of-the-art CNN architectures combined with GLCM (Gray-Level Co-occurrence Matrix) texture features. This project implements multiple approaches for Optical Coherence Tomography (OCT) image analysis and diabetic retinopathy detection.
 
-## 🎯 Key Features
+## Key Features
 
-- **🚀 FastViT Architecture**: State-of-the-art vision transformer for 8-class OCT classification
-- **🔬 CNN+GLCM Fusion**: Novel approach combining deep features with texture analysis
-- **⚡ Hyperparameter Optimization**: Automated tuning using Optuna
-- **📊 Comprehensive Evaluation**: Advanced metrics and visualization tools
-- **🎯 Class Imbalance Handling**: Weighted sampling and balanced training
-- **💾 Production Ready**: Complete training pipeline with checkpointing
+- **FastViT Architecture**: State-of-the-art vision transformer for 8-class OCT classification
+- **CNN+GLCM Fusion**: Novel approach combining deep features with texture analysis
+- **Hyperparameter Optimization**: Automated tuning using Optuna
+- **Comprehensive Evaluation**: Advanced metrics and visualization tools
+- **Class Imbalance Handling**: Weighted sampling and balanced training
+- **Production Ready**: Complete training pipeline with checkpointing
 
-## 🏥 Medical Applications
+## Medical Applications
 
 ### OCT 8-Class Classification (FastViT)
 - **Classes**: DR, NORMAL, DME, AMD, CNV, DRUSEN, MH, CSR
@@ -27,42 +27,42 @@ A comprehensive deep learning framework for retinal disease classification using
 - **Features**: GLCM texture features (12-dimensional), Optuna optimization
 - **Input**: Folder-based dataset structure with automatic preprocessing
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 retinal-disease-classification/
-├── 📄 README.md                    # Project documentation
-├── 📄 requirements.txt             # Dependencies
-├── 📄 demo_synthetic.py           # Complete demo with synthetic data
-├── 📄 example_usage.py            # Usage examples
-├── 📁 config/                     # Configuration files
+├── README.md                    # Project documentation
+├── requirements.txt             # Dependencies
+├── demo_synthetic.py           # Complete demo with synthetic data
+├── example_usage.py            # Usage examples
+├── config/                     # Configuration files
 │   ├── oct_config.py              # OCT 8-class configuration
 │   └── dr_config.py               # DR classification configuration
-├── 📁 src/                        # Source code
-│   ├── 📁 data/                   # Data handling modules
+├── src/                        # Source code
+│   ├── data/                   # Data handling modules
 │   │   ├── oct_dataset.py         # OCT dataset processing
 │   │   └── dr_dataset.py          # DR dataset with GLCM features
-│   ├── 📁 models/                 # Model definitions
+│   ├── models/                 # Model definitions
 │   │   ├── fastvit_model.py       # FastViT wrapper
 │   │   └── cnn_glcm_models.py     # CNN+GLCM architectures
-│   ├── 📁 features/               # Feature extraction
+│   ├── features/               # Feature extraction
 │   │   └── glcm_extractor.py      # GLCM texture analysis
-│   ├── 📁 training/               # Training modules
+│   ├── training/               # Training modules
 │   │   ├── oct_trainer.py         # OCT model trainer
 │   │   └── dr_trainer.py          # DR model trainer
-│   └── 📁 utils/                  # Utilities
+│   └── utils/                  # Utilities
 │       ├── visualization.py       # Plotting and visualization
 │       └── metrics.py             # Evaluation metrics
-├── 📁 scripts/                    # Training scripts
+├── scripts/                    # Training scripts
 │   ├── train_oct_fastvit.py       # OCT training pipeline
 │   └── train_dr_models.py         # DR training pipeline
-└── 📁 outputs/                    # Generated files
+└── outputs/                    # Generated files
     ├── models/                    # Saved model checkpoints
     ├── plots/                     # Training visualizations
     └── logs/                      # Training logs
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -109,7 +109,7 @@ python scripts/train_dr_models.py \
     --skip_optimization
 ```
 
-## 🔬 Technical Details
+## Technical Details
 
 ### FastViT Models
 - **FastViT-T8**: ~3.3M parameters, optimized for speed
@@ -128,7 +128,7 @@ python scripts/train_dr_models.py \
 - **Properties**: Contrast, Homogeneity, Energy (mean & std)
 - **Total**: 12-dimensional feature vector
 
-## 📊 Performance
+## Performance
 
 The models achieve state-of-the-art performance on retinal disease classification:
 
@@ -136,7 +136,7 @@ The models achieve state-of-the-art performance on retinal disease classificatio
 - **CNN+GLCM**: Enhanced performance through texture feature fusion
 - **Optuna Optimization**: Automated hyperparameter tuning for optimal results
 
-## 🛠️ Configuration
+## Configuration
 
 Update configuration files to match your setup:
 
@@ -149,7 +149,7 @@ TARGET_CLASSES = ['DR', 'NORMAL', 'DME', 'AMD', 'CNV', 'DRUSEN', 'MH', 'CSR']
 DATA_DIR = "/path/to/your/dr/dataset"
 ```
 
-## 📈 Visualization
+## Visualization
 
 The framework includes comprehensive visualization tools:
 
@@ -159,7 +159,7 @@ The framework includes comprehensive visualization tools:
 - Dataset distribution analysis
 - ROC curves (when applicable)
 
-## 🔧 Advanced Usage
+## Advanced Usage
 
 ### Custom Model Training
 
@@ -184,7 +184,7 @@ extractor = GLCMFeatureExtractor()
 features = extractor.extract_glcm_features(image)
 ```
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.8+
 - PyTorch 2.0+
@@ -197,25 +197,25 @@ features = extractor.extract_glcm_features(image)
 - PIL/Pillow
 - pandas, numpy
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - FastViT architecture from the timm library
 - GLCM implementation using scikit-image
 - Optuna for hyperparameter optimization
 - PyTorch team for the deep learning framework
 
-## 📞 Contact
+## Contact
 
 For questions or collaborations, please open an issue or contact the maintainer.
 
 ---
 
-⭐ **Star this repository if you find it useful!** ⭐
+**Star this repository if you find it useful!**

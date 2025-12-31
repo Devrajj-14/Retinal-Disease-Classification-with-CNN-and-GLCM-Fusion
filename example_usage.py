@@ -19,7 +19,7 @@ def example_oct_classification():
     
     # Check if dataset exists
     if not os.path.exists(data_dir):
-        print(f"❌ Dataset not found at: {data_dir}")
+        print(f" Dataset not found at: {data_dir}")
         print("Please update the data_dir path in this script")
         return
     
@@ -44,7 +44,7 @@ def example_oct_classification():
     # Train model (use small epochs for demo)
     model, history = trainer.train_model(dataframes, epochs=5, batch_size=16)
     
-    print("✅ OCT classification example completed!")
+    print(" OCT classification example completed!")
 
 def example_dr_classification():
     """Example of DR classification with CNN + GLCM"""
@@ -56,7 +56,7 @@ def example_dr_classification():
     
     # Check if dataset exists
     if not os.path.exists(data_dir):
-        print(f"❌ Dataset not found at: {data_dir}")
+        print(f" Dataset not found at: {data_dir}")
         print("Please update the data_dir path in this script")
         return
     
@@ -88,7 +88,7 @@ def example_dr_classification():
         train_loader, val_loader, test_loader, class_names, num_epochs=3
     )
     
-    print("✅ DR classification example completed!")
+    print(" DR classification example completed!")
 
 def run_command_line_examples():
     """Show command line usage examples"""
@@ -118,14 +118,14 @@ def run_command_line_examples():
 def main():
     """Main example function"""
     
-    print("🚀 OCT Classification Project - Usage Examples")
+    print(" OCT Classification Project - Usage Examples")
     print("=" * 60)
     
     # Show command line examples
     run_command_line_examples()
     
     print("\n" + "=" * 60)
-    print("📝 Notes:")
+    print(" Notes:")
     print("1. Update dataset paths in the configuration files")
     print("2. Install required dependencies: pip install -r requirements.txt")
     print("3. Ensure CUDA is available for GPU acceleration")

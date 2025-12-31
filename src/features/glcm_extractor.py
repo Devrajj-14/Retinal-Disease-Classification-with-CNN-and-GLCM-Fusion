@@ -15,7 +15,7 @@ class GLCMFeatureExtractor:
         self.distances = distances
         self.angles = [np.deg2rad(angle) for angle in angles]
         self.levels = levels
-        print(f"🔬 GLCM Extractor: {len(distances)} distances, {len(angles)} angles, {levels} levels")
+        print(f" GLCM Extractor: {len(distances)} distances, {len(angles)} angles, {levels} levels")
     
     def extract_glcm_features(self, image):
         """Extract compact GLCM features from PIL image"""
@@ -64,7 +64,7 @@ class GLCMFeatureExtractor:
             return np.array(features, dtype=np.float32)
         
         except Exception as e:
-            print(f"❌ GLCM extraction error: {e}")
+            print(f" GLCM extraction error: {e}")
             return np.zeros(len(self.distances) * 6, dtype=np.float32)  # 6 features per distance
     
     def get_feature_names(self):

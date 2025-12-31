@@ -27,7 +27,7 @@ class FolderDRDataset(Dataset):
         self.classes = []
         self.class_to_idx = {}
         
-        print(f"📁 Loading dataset from: {root_dir}")
+        print(f" Loading dataset from: {root_dir}")
         
         # Get class folders
         for class_name in sorted(os.listdir(root_dir)):
@@ -45,9 +45,9 @@ class FolderDRDataset(Dataset):
                         self.samples.append((img_path, class_idx))
                         image_count += 1
                 
-                print(f"   📊 Class {class_name} (ID: {class_idx}): {image_count} images")
+                print(f"    Class {class_name} (ID: {class_idx}): {image_count} images")
         
-        print(f"✅ Loaded {len(self.samples)} total samples from {len(self.classes)} classes")
+        print(f" Loaded {len(self.samples)} total samples from {len(self.classes)} classes")
         
         # Calculate class distribution
         labels = [label for _, label in self.samples]
@@ -69,7 +69,7 @@ class FolderDRDataset(Dataset):
         try:
             image = Image.open(img_path).convert('RGB')
         except Exception as e:
-            print(f"❌ Error loading {img_path}: {e}")
+            print(f" Error loading {img_path}: {e}")
             image = Image.new('RGB', (224, 224), (0, 0, 0))
         
         # Extract GLCM features before transform
@@ -89,7 +89,7 @@ def create_data_loaders(data_dir, batch_size=16, val_split=0.2, test_split=0.1,
                        image_size=224, model_type='densenet121'):
     """Create train/val/test data loaders from folder structure"""
     
-    print("🎨 Setting up data transformations...")
+    print(" Setting up data transformations...")
     
     # Adjust image size based on model type
     if model_type == 'efficientnet_b3':
@@ -112,7 +112,7 @@ def create_data_loaders(data_dir, batch_size=16, val_split=0.2, test_split=0.1,
     ])
     
     # Create full dataset
-    print("📦 Creating full dataset...")
+    print(" Creating full dataset...")
     full_dataset = FolderDRDataset(data_dir, transform=None, extract_glcm=True)
     
     # Create stratified splits
@@ -144,7 +144,7 @@ def create_data_loaders(data_dir, batch_size=16, val_split=0.2, test_split=0.1,
     np.random.shuffle(val_indices)
     np.random.shuffle(test_indices)
     
-    print(f"📊 Data split:")
+    print(f" Data split:")
     print(f"   Training:   {len(train_indices)} samples")
     print(f"   Validation: {len(val_indices)} samples")
     print(f"   Test:       {len(test_indices)} samples")

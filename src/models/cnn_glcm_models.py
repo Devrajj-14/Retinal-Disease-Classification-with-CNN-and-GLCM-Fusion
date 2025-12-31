@@ -19,7 +19,7 @@ class CombinedDenseNetClassifier(nn.Module):
         if dropout_rates is None:
             dropout_rates = [0.2, 0.3, 0.4]
         
-        print(f"🏗️  Building DenseNet121 + GLCM model...")
+        print(f"  Building DenseNet121 + GLCM model...")
         
         # DenseNet121 backbone
         self.base_model = models.densenet121(pretrained=True)
@@ -42,7 +42,7 @@ class CombinedDenseNetClassifier(nn.Module):
             nn.Linear(256, n_classes)
         )
         
-        print(f"✅ Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
+        print(f" Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
     
     def forward(self, x, glcm_feats):
         # DenseNet features
@@ -62,7 +62,7 @@ class CombinedResNet50Classifier(nn.Module):
         if dropout_rates is None:
             dropout_rates = [0.2, 0.3, 0.4]
         
-        print(f"🏗️  Building ResNet50 + GLCM model...")
+        print(f"  Building ResNet50 + GLCM model...")
         
         # ResNet50 backbone
         self.base_model = models.resnet50(pretrained=True)
@@ -85,7 +85,7 @@ class CombinedResNet50Classifier(nn.Module):
             nn.Linear(256, n_classes)
         )
         
-        print(f"✅ ResNet50 Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
+        print(f" ResNet50 Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
     
     def forward(self, x, glcm_feats):
         # ResNet50 features
@@ -105,7 +105,7 @@ class CombinedEfficientNetB3Classifier(nn.Module):
         if dropout_rates is None:
             dropout_rates = [0.2, 0.3, 0.4]
         
-        print(f"🏗️  Building EfficientNet-B3 + GLCM model...")
+        print(f"  Building EfficientNet-B3 + GLCM model...")
         
         if EFFICIENTNET_AVAILABLE:
             # Use efficientnet_pytorch library
@@ -113,7 +113,7 @@ class CombinedEfficientNetB3Classifier(nn.Module):
             self.base_model._fc = nn.Identity()  # Remove final FC layer
             self.feature_size = 1536  # EfficientNet-B3 feature size
             self.use_pytorch_efficientnet = True
-            print("✅ Using efficientnet_pytorch library")
+            print(" Using efficientnet_pytorch library")
         else:
             # Use torchvision version
             try:
@@ -121,10 +121,10 @@ class CombinedEfficientNetB3Classifier(nn.Module):
                 self.base_model.classifier = nn.Identity()
                 self.feature_size = 1536
                 self.use_pytorch_efficientnet = False
-                print("✅ Using torchvision EfficientNet-B3")
+                print(" Using torchvision EfficientNet-B3")
             except:
                 # Fallback to ResNet34 if EfficientNet not available
-                print("⚠️  EfficientNet-B3 not available, using ResNet34 as fallback...")
+                print("  EfficientNet-B3 not available, using ResNet34 as fallback...")
                 self.base_model = models.resnet34(pretrained=True)
                 self.base_model.fc = nn.Identity()
                 self.feature_size = 512
@@ -147,7 +147,7 @@ class CombinedEfficientNetB3Classifier(nn.Module):
             nn.Linear(256, n_classes)
         )
         
-        print(f"✅ EfficientNet-B3 Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
+        print(f" EfficientNet-B3 Model built: {self.feature_size} CNN + {self.glcm_size} GLCM → {n_classes} classes")
     
     def forward(self, x, glcm_feats):
         # EfficientNet features

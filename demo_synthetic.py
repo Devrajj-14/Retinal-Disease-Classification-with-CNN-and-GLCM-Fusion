@@ -24,7 +24,7 @@ from src.utils.metrics import calculate_metrics, print_metrics_summary
 def create_synthetic_dataset():
     """Create a small synthetic dataset for demonstration"""
     
-    print("🎨 Creating synthetic dataset...")
+    print("Creating synthetic dataset...")
     
     # Create synthetic images and labels
     n_samples = 100
@@ -59,13 +59,13 @@ def create_synthetic_dataset():
         images.append(image)
         labels.append(class_id)
     
-    print(f"✅ Created {n_samples} synthetic images with {len(class_names)} classes")
+    print(f"Created {n_samples} synthetic images with {len(class_names)} classes")
     return images, labels, class_names
 
 def demo_glcm_features():
     """Demonstrate GLCM feature extraction"""
     
-    print("\n🔬 Demonstrating GLCM Feature Extraction...")
+    print("\nDemonstrating GLCM Feature Extraction...")
     
     # Create GLCM extractor
     extractor = GLCMFeatureExtractor()
@@ -82,14 +82,14 @@ def demo_glcm_features():
             print(f"Image {i} (Class: {class_names[labels[i]]}): {features[:3]}... (showing first 3 features)")
     
     features_array = np.array(features_list)
-    print(f"✅ Extracted GLCM features: {features_array.shape}")
+    print(f"Extracted GLCM features: {features_array.shape}")
     
     return features_array, labels[:len(features_list)]
 
 def demo_fastvit_model():
     """Demonstrate FastViT model"""
     
-    print("\n🏗️  Demonstrating FastViT Model...")
+    print("\n  Demonstrating FastViT Model...")
     
     # Create model
     model_builder = FastViTModel(model_name="fastvit_t8", num_classes=5, pretrained=False)
@@ -103,7 +103,7 @@ def demo_fastvit_model():
     with torch.no_grad():
         output = model(dummy_input)
     
-    print(f"✅ FastViT inference successful! Input: {dummy_input.shape}, Output: {output.shape}")
+    print(f" FastViT inference successful! Input: {dummy_input.shape}, Output: {output.shape}")
     
     # Simulate predictions
     predictions = torch.argmax(output, dim=1).numpy()
@@ -114,7 +114,7 @@ def demo_fastvit_model():
 def demo_cnn_glcm_model():
     """Demonstrate CNN+GLCM model"""
     
-    print("\n🏗️  Demonstrating CNN+GLCM Model...")
+    print("\n  Demonstrating CNN+GLCM Model...")
     
     # Create model
     model = get_model('densenet121', n_classes=5, glcm_size=12)
@@ -128,7 +128,7 @@ def demo_cnn_glcm_model():
     with torch.no_grad():
         output = model(dummy_images, dummy_glcm)
     
-    print(f"✅ CNN+GLCM inference successful! Output: {output.shape}")
+    print(f" CNN+GLCM inference successful! Output: {output.shape}")
     
     # Simulate predictions
     predictions = torch.argmax(output, dim=1).numpy()
@@ -139,7 +139,7 @@ def demo_cnn_glcm_model():
 def demo_metrics_evaluation():
     """Demonstrate metrics calculation"""
     
-    print("\n📊 Demonstrating Metrics Evaluation...")
+    print("\n Demonstrating Metrics Evaluation...")
     
     # Generate synthetic predictions and labels
     n_samples = 50
@@ -163,7 +163,7 @@ def demo_metrics_evaluation():
 def demo_visualization():
     """Demonstrate visualization utilities"""
     
-    print("\n📈 Demonstrating Visualization...")
+    print("\n Demonstrating Visualization...")
     
     # Create sample class distribution
     class_counts = {
@@ -181,12 +181,12 @@ def demo_visualization():
         'outputs/plots/demo_distribution.png'
     )
     
-    print("✅ Dataset distribution plot saved to outputs/plots/demo_distribution.png")
+    print(" Dataset distribution plot saved to outputs/plots/demo_distribution.png")
 
 def main():
     """Main demo function"""
     
-    print("🚀 OCT Classification Project - Complete Demo")
+    print(" OCT Classification Project - Complete Demo")
     print("=" * 60)
     
     # Create output directories
@@ -209,20 +209,20 @@ def main():
         demo_visualization()
         
         print("\n" + "=" * 60)
-        print("🎉 DEMO COMPLETED SUCCESSFULLY!")
+        print(" DEMO COMPLETED SUCCESSFULLY!")
         print("=" * 60)
-        print("✅ All components working correctly:")
+        print(" All components working correctly:")
         print("   • GLCM feature extraction")
         print("   • FastViT model inference")
         print("   • CNN+GLCM model inference")
         print("   • Metrics calculation")
         print("   • Visualization utilities")
-        print("\n📁 Check the 'outputs/' directory for generated files")
+        print("\n Check the 'outputs/' directory for generated files")
         
         return True
         
     except Exception as e:
-        print(f"\n❌ Demo failed: {e}")
+        print(f"\n Demo failed: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -231,10 +231,10 @@ if __name__ == "__main__":
     success = main()
     
     if success:
-        print("\n🎯 Next Steps:")
+        print("\n Next Steps:")
         print("1. Update dataset paths in config files")
         print("2. Run training scripts with your actual data")
         print("3. Experiment with different model architectures")
         print("4. Use Optuna for hyperparameter optimization")
     else:
-        print("\n🔧 Please check the error messages above and install missing dependencies")
+        print("\n Please check the error messages above and install missing dependencies")
